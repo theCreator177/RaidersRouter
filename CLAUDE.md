@@ -37,20 +37,20 @@ For full test matrix, see `CONTRIBUTING.md` → "Running Tests". For deep archit
 
 **OmniRoute** — unified AI proxy/router. One endpoint, 278 LLM providers, auto-fallback.
 
-| Layer         | Location                | Purpose                                                                                                                                                 |
-| ------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| API Routes    | `src/app/api/v1/`       | Next.js App Router — entry points                                                                                                                       |
-| Handlers      | `open-sse/handlers/`    | Request processing (chat, embeddings, etc)                                                                                                              |
-| Executors     | `open-sse/executors/`   | Provider-specific HTTP dispatch                                                                                                                         |
-| Translators   | `open-sse/translator/`  | Format conversion (OpenAI↔Claude↔Gemini)                                                                                                                |
-| Transformer   | `open-sse/transformer/` | Responses API ↔ Chat Completions                                                                                                                        |
-| Services      | `open-sse/services/`    | Combo routing, rate limits, caching, etc                                                                                                                |
-| Database      | `src/lib/db/`           | SQLite domain modules (95 files, 110 migrations)                                                                                                        |
-| Domain/Policy | `src/domain/`           | Policy engine, cost rules, fallback logic                                                                                                               |
-| MCP Server    | `open-sse/mcp-server/`  | 104 tools (42 base + memory/skill/agentSkill/pool/notion/obsidian/gamification/plugin modules), 3 transports (stdio / SSE / Streamable HTTP), 31 scopes |
-| A2A Server    | `src/lib/a2a/`          | JSON-RPC 2.0 agent protocol                                                                                                                             |
-| Skills        | `src/lib/skills/`       | Extensible skill framework                                                                                                                              |
-| Memory        | `src/lib/memory/`       | Persistent conversational memory                                                                                                                        |
+| Layer         | Location                | Purpose                                                                                                                                                              |
+| ------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| API Routes    | `src/app/api/v1/`       | Next.js App Router — entry points                                                                                                                                    |
+| Handlers      | `open-sse/handlers/`    | Request processing (chat, embeddings, etc)                                                                                                                           |
+| Executors     | `open-sse/executors/`   | Provider-specific HTTP dispatch                                                                                                                                      |
+| Translators   | `open-sse/translator/`  | Format conversion (OpenAI↔Claude↔Gemini)                                                                                                                             |
+| Transformer   | `open-sse/transformer/` | Responses API ↔ Chat Completions                                                                                                                                     |
+| Services      | `open-sse/services/`    | Combo routing, rate limits, caching, etc                                                                                                                             |
+| Database      | `src/lib/db/`           | SQLite domain modules (95 files, 110 migrations)                                                                                                                     |
+| Domain/Policy | `src/domain/`           | Policy engine, cost rules, fallback logic                                                                                                                            |
+| MCP Server    | `open-sse/mcp-server/`  | 110 tools (42 base + memory/skill/agentSkill/pool/notion/obsidian/gamification/plugin/graphContext modules), 3 transports (stdio / SSE / Streamable HTTP), 35 scopes |
+| A2A Server    | `src/lib/a2a/`          | JSON-RPC 2.0 agent protocol                                                                                                                                          |
+| Skills        | `src/lib/skills/`       | Extensible skill framework                                                                                                                                           |
+| Memory        | `src/lib/memory/`       | Persistent conversational memory                                                                                                                                     |
 
 Monorepo: `src/` (Next.js 16 app), `open-sse/` (streaming engine workspace), `electron/` (desktop app), `tests/`, `bin/` (CLI entry point).
 
@@ -288,7 +288,7 @@ connection continue serving other models.
 
 ### Adding a New A2A Skill
 
-1. Create skill in `src/lib/a2a/skills/` (5 already exist: smart-routing, quota-management, provider-discovery, cost-analysis, health-report)
+1. Create skill in `src/lib/a2a/skills/` (8 already exist: smart-routing, quota-management, provider-discovery, cost-analysis, health-report, list-capabilities, graph-engineering, context-stack)
 2. Skill receives task context (messages, metadata) → returns structured result
 3. Register in `A2A_SKILL_HANDLERS` in `src/lib/a2a/taskExecution.ts`
 4. Expose in `src/app/.well-known/agent.json/route.ts` (Agent Card)
@@ -337,6 +337,7 @@ For any non-trivial change, read the matching deep-dive first:
 | Reasoning replay                              | `docs/routing/REASONING_REPLAY.md`                      |
 | Skills framework                              | `docs/frameworks/SKILLS.md`                             |
 | Memory system (FTS5 + Qdrant)                 | `docs/frameworks/MEMORY.md`                             |
+| Graph engineering + context stack             | `docs/frameworks/GRAPH_ENGINEERING.md`                  |
 | Cloud agents                                  | `docs/frameworks/CLOUD_AGENT.md`                        |
 | Guardrails (PII / injection / vision)         | `docs/security/GUARDRAILS.md`                           |
 | Public upstream credentials (Gemini/etc.)     | `docs/security/PUBLIC_CREDS.md`                         |

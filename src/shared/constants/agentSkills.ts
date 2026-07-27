@@ -463,4 +463,14 @@ export const CURATED_SKILLS: CuratedSkillEntry[] = [
     icon: "explore",
     isNew: true,
   },
+  {
+    id: "omni-graph-context",
+    name: "Graph Engineering & Context Stack",
+    description:
+      "Deploy multi-agent graphs from a single prompt (planner-generated nodes and connections, parallel wave execution, shared state) and build the 3-layer context engineering stack (global rules, project knowledge, task state) with persistence across sessions. Exposed as A2A skills, MCP tools, runtime skill handlers, and example plugins.",
+    category: "api",
+    area: "graph-context",
+    icon: "hub",
+    isNew: true,
+  },
 ];

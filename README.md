@@ -147,7 +147,7 @@ curl http://localhost:20128/v1/chat/completions \
 
 </div>
 
-<img src="./docs/diagrams/promise-pillars.svg" width="100%" alt="The Promise — One endpoint. 278 providers. Never stop building — OmniRoute picks the cheapest one that works. Six pillars: Never hit limits (auto-fallback across 278 providers in milliseconds, zero downtime) · Save up to 95% tokens (RTK + Caveman stacked compression cuts 15–95%, ~89% avg on tool-heavy sessions) · $0 to start (90+ free tiers, 40+ free forever — no card needed) · Every tool works (33 coding agents through one config) · One endpoint (OpenAI ↔ Claude ↔ Gemini ↔ Responses API at /v1) · Production-grade (circuit breakers, TLS stealth, MCP 104 tools, A2A, memory, guardrails, evals — 25,000+ tests)."/>
+<img src="./docs/diagrams/promise-pillars.svg" width="100%" alt="The Promise — One endpoint. 278 providers. Never stop building — OmniRoute picks the cheapest one that works. Six pillars: Never hit limits (auto-fallback across 278 providers in milliseconds, zero downtime) · Save up to 95% tokens (RTK + Caveman stacked compression cuts 15–95%, ~89% avg on tool-heavy sessions) · $0 to start (90+ free tiers, 40+ free forever — no card needed) · Every tool works (33 coding agents through one config) · One endpoint (OpenAI ↔ Claude ↔ Gemini ↔ Responses API at /v1) · Production-grade (circuit breakers, TLS stealth, MCP 110 tools, A2A, memory, guardrails, evals — 25,000+ tests)."/>
 
 <br/>
 <br/>
@@ -260,7 +260,7 @@ All **19** strategies — mix & match per combo step:
 | 🆓 Free providers                      | **90+ (40+ free forever)**             | 1–5           |
 | 🔀 Routing strategies                  | **19** strategies                      | 1–3           |
 | 🗜️ Token compression                   | **RTK + Caveman stacked (15–95%)**     | None / 20–40% |
-| 🧰 Built-in MCP server                 | **104 tools, 3 transports, 31 scopes** | Rare          |
+| 🧰 Built-in MCP server                 | **110 tools, 3 transports, 35 scopes** | Rare          |
 | 🤝 A2A agent protocol                  | **6 skills, JSON-RPC 2.0**             | None          |
 | 🧠 Memory (FTS5 + vector)              | **Yes**                                | Rare          |
 | 🛡️ Guardrails (PII, injection, vision) | **Yes**                                | Rare          |
@@ -491,7 +491,7 @@ Expose OmniRoute over **MCP** or **A2A** and any capable agent gets the keys to 
 | Protocol           | Endpoint                  | Use it for                                              |
 | ------------------ | ------------------------- | ------------------------------------------------------- |
 | 🧰 **MCP (stdio)** | `omniroute --mcp`         | Plug into Claude Desktop, Cursor, any MCP client        |
-| 🌊 **MCP (HTTP)**  | `/api/mcp/stream`         | Remote MCP — **104 tools**, 31 scopes, full audit trail |
+| 🌊 **MCP (HTTP)**  | `/api/mcp/stream`         | Remote MCP — **110 tools**, 35 scopes, full audit trail |
 | 📡 **MCP (SSE)**   | `/api/mcp/sse`            | Streaming MCP transport                                 |
 | 🤝 **A2A**         | `/.well-known/agent.json` | Agent-to-agent, **JSON-RPC 2.0** + SSE, 6 skills        |
 

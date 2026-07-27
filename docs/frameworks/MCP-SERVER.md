@@ -6,9 +6,9 @@ lastUpdated: 2026-06-28
 
 # OmniRoute MCP Server Documentation
 
-> Model Context Protocol server with 104 tools across routing, cache, compression, memory, skills, proxy, pool, and context source operations.
+> Model Context Protocol server with 110 tools across routing, cache, compression, memory, skills, proxy, pool, agent-graph, context-stack, and context source operations.
 >
-> Source of truth: `open-sse/mcp-server/server.ts` computes **104 unique tools** with `countUniqueMcpTools()`: 42 canonical definitions (including the six CCR lifecycle tools and the agent-skills trio), plus memory (3), skills (4), GitHub skills (3), pool (6), gamification (8), plugins (8), Notion (6), Obsidian (22), and two RTK-only compression tools.
+> Source of truth: `open-sse/mcp-server/server.ts` computes **110 unique tools** with `countUniqueMcpTools()`: 42 canonical definitions (including the six CCR lifecycle tools and the agent-skills trio), plus memory (3), skills (4), GitHub skills (3), pool (6), gamification (8), plugins (8), Notion (6), Obsidian (22), graph/context (6), and two RTK-only compression tools.
 
 ## Installation
 
@@ -227,8 +227,8 @@ See [AGENT-SKILLS.md](./AGENT-SKILLS.md) for the full catalog and how external a
 
 ## Related Frameworks (v3.8.0)
 
-The MCP tool inventory above (104 unique tools, computed by `countUniqueMcpTools()`) is intentionally
-scoped to runtime routing/cache/compression/memory/skills/proxy/context-source operations. Two adjacent
+The MCP tool inventory above (110 unique tools, computed by `countUniqueMcpTools()`) is intentionally
+scoped to runtime routing/cache/compression/memory/skills/proxy/agent-graph/context-stack/context-source operations. Two adjacent
 frameworks ship alongside the MCP server in v3.8.0 and are documented separately:
 
 ### Cloud Agents
@@ -305,6 +305,10 @@ MCP tools are authenticated through API key scopes. Scope enforcement is central
 | `write:skills`        | `skills_enable`                                                                                                   |
 | `execute:skills`      | `skills_execute`                                                                                                  |
 | `read:catalog`        | `agent_skills_list`, `agent_skills_get`, `agent_skills_coverage`                                                  |
+| `read:agent-graph`    | `agent_graph_validate`                                                                                            |
+| `execute:agent-graph` | `agent_graph_plan`, `agent_graph_run`                                                                             |
+| `read:context-stack`  | `context_stack_build`, `context_stack_load`                                                                       |
+| `write:context-stack` | `context_stack_save`                                                                                              |
 
 Wildcard scopes are supported: `read:*` grants all read-scopes, `*` grants full access.
 
@@ -369,7 +373,7 @@ MCP tool, prompt, and resource registries can compress descriptions at registrat
 
 Description compression shrinks each tool's metadata; **tool-cardinality reduction** goes one step further by reducing _how many_ tools are announced at all. Advertising fewer tools in the `tools/list` manifest cuts the per-request token cost the client's model pays for the tool catalog ("layer 5" compression). The implementation is a pure, stateless filter in `open-sse/mcp-server/toolCardinality.ts` (`reduceToolManifest`), wired into the registration loop in `createMcpServer()` (`open-sse/mcp-server/server.ts`).
 
-**Opt-in, off by default.** The filter only runs when at least one of two environment variables is set; with neither set, all 104 tools are announced unchanged.
+**Opt-in, off by default.** The filter only runs when at least one of two environment variables is set; with neither set, all 110 tools are announced unchanged.
 
 | Variable         | Mode                                                                                    |
 | :--------------- | :-------------------------------------------------------------------------------------- |
@@ -444,6 +448,7 @@ Use the dashboard or the `/api/mcp/audit` and `/api/mcp/audit/stats` REST endpoi
 | `open-sse/mcp-server/tools/notionTools.ts`                               | Notion context source tool definitions (6 tools)                 |
 | `open-sse/mcp-server/tools/gamificationTools.ts`                         | Gamification tool definitions (8 tools)                          |
 | `open-sse/mcp-server/tools/pluginTools.ts`                               | Plugin registration and management tools (8 tools)               |
+| `open-sse/mcp-server/tools/graphContextTools.ts`                         | Agent graph + context stack tool definitions (6 tools)           |
 | `src/app/api/mcp/status/route.ts`                                        | `/api/mcp/status` endpoint                                       |
 | `src/app/api/mcp/tools/route.ts`                                         | `/api/mcp/tools` endpoint                                        |
 | `src/app/api/mcp/sse/route.ts`                                           | `/api/mcp/sse` SSE transport route                               |

@@ -41,6 +41,14 @@ export const A2A_SKILL_HANDLERS: Record<string, A2ASkillHandler> = {
     const skillModule = await import("./skills/listCapabilities");
     return skillModule.executeListCapabilities(task);
   },
+  "graph-engineering": async (task) => {
+    const skillModule = await import("./skills/graphEngineering");
+    return skillModule.executeGraphEngineering(task);
+  },
+  "context-stack": async (task) => {
+    const skillModule = await import("./skills/contextStack");
+    return skillModule.executeContextStack(task);
+  },
 };
 
 export async function executeA2ATaskWithState(

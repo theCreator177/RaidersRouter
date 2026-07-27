@@ -26,6 +26,8 @@ export type SkillArea =
   | "inference"
   // GitHub skills
   | "github-skills"
+  // Graph engineering + context stack
+  | "graph-context"
   // Config skills
   | "config-codex-cli"
   // CLI families (20)

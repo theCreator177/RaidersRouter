@@ -41,6 +41,7 @@ export const API_SKILL_IDS: readonly string[] = [
   "omni-version-manager",
   "omni-inference",
   "omni-github-skills",
+  "omni-graph-context",
 ] as const;
 
 /** Config skill IDs. */

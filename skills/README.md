@@ -12,42 +12,44 @@ consume OmniRoute via OpenAI-compatible REST in one fetch.
 
 ## How agents discover capabilities
 
-- **MCP tool**: `omniroute_agent_skills_list` (scope `read:catalog`) — returns the full 42-skill catalog in one call.
+- **MCP tool**: `omniroute_agent_skills_list` (scope `read:catalog`) — returns the full 46-skill catalog in one call.
 - **A2A skill**: `list-capabilities` — JSON-RPC 2.0 endpoint that returns the agent card with all registered skills.
 
 See [`docs/frameworks/AGENT-SKILLS.md`](../docs/frameworks/AGENT-SKILLS.md) for the full framework reference.
 
 ---
 
-## API Skills (22)
+## API Skills (24)
 
 Each manifest URL follows the pattern:
 `https://raw.githubusercontent.com/diegosouzapw/OmniRoute/main/skills/<id>/SKILL.md`
 
-| ID                     | Name                          | Description                                                                                                                                                                                    |
-| ---------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `omni-auth`            | Authentication                | Manage API key authentication and session tokens. Start here to authenticate requests via Bearer token, obtain session cookies, and configure login requirements.                              |
-| `omni-providers`       | Providers                     | Manage provider connections, API keys, OAuth flows, and connection tests. List, add, update, remove, and test AI provider integrations (OpenAI, Anthropic, Gemini, and 160+).                  |
-| `omni-models`          | Models                        | Query available AI models across all configured providers. List models, resolve model aliases, and browse the full model catalog including provider-specific variants.                         |
-| `omni-combos-routing`  | Combos & Routing              | Create and manage routing combos with 14 strategies (priority, weighted, round-robin, Auto-combo, etc.). Configure fallback chains, test routing outcomes, and retrieve combo metrics.         |
-| `omni-api-keys`        | API Keys                      | Create, list, rotate, and revoke OmniRoute API keys. Control per-key scopes, spending limits, and expiration.                                                                                  |
-| `omni-usage-logs`      | Usage & Logs                  | Access detailed call logs and usage analytics. Filter by provider, model, time range, status, and cost. Export logs and aggregate token usage.                                                 |
-| `omni-budget`          | Budget & Rate Limits          | Configure spending limits, token quotas, and rate-limit policies per API key or globally. Inspect current consumption and enforce cost controls.                                               |
-| `omni-settings`        | Settings                      | Read and update global application settings: system prompts, thinking budget, IP filters, payload rules, combo defaults, and require-login configuration.                                      |
-| `omni-proxies`         | Proxy Configuration           | Configure HTTP/HTTPS/SOCKS proxies for upstream provider requests. Set per-provider or global proxy rules, test connectivity, and manage proxy rotation.                                       |
-| `omni-cache`           | Cache                         | Manage the LLM response cache. View cache statistics, clear entries, configure TTL policies, and control semantic-similarity caching thresholds.                                               |
-| `omni-compression`     | Compression                   | Configure RTK, Caveman, and stacked compression modes. Manage language packs, custom rules, and test prompt compression reducing tokens by 60–90%.                                             |
-| `omni-context-rtk`     | Context & RTK                 | Configure RTK filters, context engineering rules, and context relay settings. Test compression with real prompt samples and manage context transformation pipelines.                           |
-| `omni-resilience`      | Resilience & Monitoring       | Monitor provider health, circuit-breaker states, p50/p95/p99 latency metrics, and budget guard alerts. Inspect connection cooldowns and model lockouts in real time.                           |
-| `omni-cli-tools`       | CLI Tools                     | Manage CLI tool integrations exposed via the API. List, configure, and invoke CLI tool plugins that extend OmniRoute's automation surface.                                                     |
-| `omni-tunnels`         | Tunnels                       | Create and manage secure tunnels (ngrok, Cloudflare Tunnel, custom) to expose OmniRoute to the internet or share access with remote agents and CI pipelines.                                   |
-| `omni-sync-cloud`      | Cloud Sync                    | Synchronise OmniRoute configuration, provider connections, and settings to/from cloud storage. Manage cloud worker authentication and remote backup targets.                                   |
-| `omni-db-backups`      | Database & Backups            | Trigger system backups, restore from backup files, and manage the SQLite database lifecycle. Supports export, import, and incremental snapshot strategies.                                     |
-| `omni-webhooks`        | Webhooks                      | Register, list, test, and remove webhook endpoints. Configure event subscriptions (request.completed, provider.error, budget.exceeded, etc.) and manage delivery retries.                      |
-| `omni-mcp`             | MCP Server                    | Connect to the OmniRoute MCP server (37 tools, 3 transports: SSE/stdio/HTTP). Covers routing, cache, compression, memory, skills, providers, and audit tools across 16 permission scopes.      |
-| `omni-agents-a2a`      | Agents & A2A Protocol         | Interact with OmniRoute via JSON-RPC 2.0 agent-to-agent protocol. 6 built-in A2A skills: smart-routing, quota-management, provider-discovery, cost-analysis, health-report, list-capabilities. |
-| `omni-version-manager` | Version Manager               | Install, start, stop, restart, and update embedded services (9Router, CLIProxyAPI). Monitor service status, retrieve logs, and configure auto-start.                                           |
-| `omni-inference`       | Inference (OpenAI-compatible) | The core OpenAI-compatible inference endpoints: chat completions, embeddings, images, audio (TTS/STT), moderations, rerank, and the Responses API.                                             |
+| ID                     | Name                              | Description                                                                                                                                                                                    |
+| ---------------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `omni-auth`            | Authentication                    | Manage API key authentication and session tokens. Start here to authenticate requests via Bearer token, obtain session cookies, and configure login requirements.                              |
+| `omni-providers`       | Providers                         | Manage provider connections, API keys, OAuth flows, and connection tests. List, add, update, remove, and test AI provider integrations (OpenAI, Anthropic, Gemini, and 160+).                  |
+| `omni-models`          | Models                            | Query available AI models across all configured providers. List models, resolve model aliases, and browse the full model catalog including provider-specific variants.                         |
+| `omni-combos-routing`  | Combos & Routing                  | Create and manage routing combos with 14 strategies (priority, weighted, round-robin, Auto-combo, etc.). Configure fallback chains, test routing outcomes, and retrieve combo metrics.         |
+| `omni-api-keys`        | API Keys                          | Create, list, rotate, and revoke OmniRoute API keys. Control per-key scopes, spending limits, and expiration.                                                                                  |
+| `omni-usage-logs`      | Usage & Logs                      | Access detailed call logs and usage analytics. Filter by provider, model, time range, status, and cost. Export logs and aggregate token usage.                                                 |
+| `omni-budget`          | Budget & Rate Limits              | Configure spending limits, token quotas, and rate-limit policies per API key or globally. Inspect current consumption and enforce cost controls.                                               |
+| `omni-settings`        | Settings                          | Read and update global application settings: system prompts, thinking budget, IP filters, payload rules, combo defaults, and require-login configuration.                                      |
+| `omni-proxies`         | Proxy Configuration               | Configure HTTP/HTTPS/SOCKS proxies for upstream provider requests. Set per-provider or global proxy rules, test connectivity, and manage proxy rotation.                                       |
+| `omni-cache`           | Cache                             | Manage the LLM response cache. View cache statistics, clear entries, configure TTL policies, and control semantic-similarity caching thresholds.                                               |
+| `omni-compression`     | Compression                       | Configure RTK, Caveman, and stacked compression modes. Manage language packs, custom rules, and test prompt compression reducing tokens by 60–90%.                                             |
+| `omni-context-rtk`     | Context & RTK                     | Configure RTK filters, context engineering rules, and context relay settings. Test compression with real prompt samples and manage context transformation pipelines.                           |
+| `omni-resilience`      | Resilience & Monitoring           | Monitor provider health, circuit-breaker states, p50/p95/p99 latency metrics, and budget guard alerts. Inspect connection cooldowns and model lockouts in real time.                           |
+| `omni-cli-tools`       | CLI Tools                         | Manage CLI tool integrations exposed via the API. List, configure, and invoke CLI tool plugins that extend OmniRoute's automation surface.                                                     |
+| `omni-tunnels`         | Tunnels                           | Create and manage secure tunnels (ngrok, Cloudflare Tunnel, custom) to expose OmniRoute to the internet or share access with remote agents and CI pipelines.                                   |
+| `omni-sync-cloud`      | Cloud Sync                        | Synchronise OmniRoute configuration, provider connections, and settings to/from cloud storage. Manage cloud worker authentication and remote backup targets.                                   |
+| `omni-db-backups`      | Database & Backups                | Trigger system backups, restore from backup files, and manage the SQLite database lifecycle. Supports export, import, and incremental snapshot strategies.                                     |
+| `omni-webhooks`        | Webhooks                          | Register, list, test, and remove webhook endpoints. Configure event subscriptions (request.completed, provider.error, budget.exceeded, etc.) and manage delivery retries.                      |
+| `omni-mcp`             | MCP Server                        | Connect to the OmniRoute MCP server (37 tools, 3 transports: SSE/stdio/HTTP). Covers routing, cache, compression, memory, skills, providers, and audit tools across 16 permission scopes.      |
+| `omni-agents-a2a`      | Agents & A2A Protocol             | Interact with OmniRoute via JSON-RPC 2.0 agent-to-agent protocol. 6 built-in A2A skills: smart-routing, quota-management, provider-discovery, cost-analysis, health-report, list-capabilities. |
+| `omni-version-manager` | Version Manager                   | Install, start, stop, restart, and update embedded services (9Router, CLIProxyAPI). Monitor service status, retrieve logs, and configure auto-start.                                           |
+| `omni-inference`       | Inference (OpenAI-compatible)     | The core OpenAI-compatible inference endpoints: chat completions, embeddings, images, audio (TTS/STT), moderations, rerank, and the Responses API.                                             |
+| `omni-github-skills`   | GitHub Skill Discovery            | Search, score, scan, and import agent skills from GitHub repositories that contain SKILL.md, CLAUDE.md, .cursorrules, and similar agent skill files.                                           |
+| `omni-graph-context`   | Graph Engineering & Context Stack | Deploy multi-agent graphs from a single prompt (planner-generated nodes/edges, parallel waves, shared state) and build the 3-layer context engineering stack with cross-session persistence.   |
 
 ---
 
