@@ -111,6 +111,36 @@ export async function GET() {
         tags: ["discovery", "capabilities"],
         examples: ["What can you do?", "List your skills", "Show capabilities"],
       },
+      {
+        id: "graph-engineering",
+        name: "Graph Engineering",
+        description:
+          "Deploys a multi-agent graph from a single prompt: a planner model " +
+          "generates the whole structure (agents + connections), then the graph " +
+          "executes in parallel waves with a shared state every downstream agent " +
+          "reads. Accepts a pre-built graph spec or plans one on the fly.",
+        tags: ["agents", "orchestration", "graph", "multi-agent"],
+        examples: [
+          "Deploy an agent graph to research, draft, and review a migration plan",
+          "Plan (but do not run) a 10-agent graph for this task",
+          "Run this pre-built agent graph against the task",
+        ],
+      },
+      {
+        id: "context-stack",
+        name: "Context Stack",
+        description:
+          "Builds the 3-layer context engineering stack (global rules, project " +
+          "knowledge, task state) in fixed order with a token budget, and " +
+          "persists layers through the memory subsystem so they survive between " +
+          "sessions.",
+        tags: ["context", "context-engineering", "memory", "layers"],
+        examples: [
+          "Build a context stack from these sections plus saved layers",
+          "Save these project conventions as persistent context",
+          "Load my saved global and project context",
+        ],
+      },
     ],
     authentication: {
       schemes: ["api-key"],

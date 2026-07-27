@@ -139,16 +139,18 @@ curl -X POST http://localhost:20128/a2a \
 
 ## Available Skills
 
-OmniRoute exposes 6 A2A skills wired in `src/lib/a2a/taskExecution.ts::A2A_SKILL_HANDLERS`. Each skill module lives in `src/lib/a2a/skills/`.
+OmniRoute exposes 8 A2A skills wired in `src/lib/a2a/taskExecution.ts::A2A_SKILL_HANDLERS`. Each skill module lives in `src/lib/a2a/skills/`.
 
-| Skill              | ID                   | Description                                                                                                     | Tags                       | Examples                               |
-| :----------------- | :------------------- | :-------------------------------------------------------------------------------------------------------------- | :------------------------- | :------------------------------------- |
-| Smart Routing      | `smart-routing`      | Routes a prompt through the optimal provider/combo using OmniRoute's combo engine + scoring                     | routing, providers         | "Route this prompt via the best model" |
-| Quota Management   | `quota-management`   | Reports per-provider quota state, helps callers decide when to throttle/switch                                  | quota, providers           | "Check quota for anthropic"            |
-| Provider Discovery | `provider-discovery` | Lists installed providers with capabilities, free-tier flags, OAuth status                                      | providers, discovery       | "What providers are available?"        |
-| Cost Analysis      | `cost-analysis`      | Estimates cost of a request/conversation given the catalog + recent usage                                       | cost, usage                | "Estimate cost for this conversation"  |
-| Health Report      | `health-report`      | Aggregates circuit breaker, cooldown, lockout state per provider                                                | health, resilience         | "Show health status of all providers"  |
-| List Capabilities  | `list-capabilities`  | Returns the full 42-entry Agent Skills catalog as a markdown table with raw SKILL.md URLs for context injection | catalog, discovery, skills | "List all OmniRoute capabilities"      |
+| Skill              | ID                   | Description                                                                                                            | Tags                         | Examples                                        |
+| :----------------- | :------------------- | :--------------------------------------------------------------------------------------------------------------------- | :--------------------------- | :---------------------------------------------- |
+| Smart Routing      | `smart-routing`      | Routes a prompt through the optimal provider/combo using OmniRoute's combo engine + scoring                            | routing, providers           | "Route this prompt via the best model"          |
+| Quota Management   | `quota-management`   | Reports per-provider quota state, helps callers decide when to throttle/switch                                         | quota, providers             | "Check quota for anthropic"                     |
+| Provider Discovery | `provider-discovery` | Lists installed providers with capabilities, free-tier flags, OAuth status                                             | providers, discovery         | "What providers are available?"                 |
+| Cost Analysis      | `cost-analysis`      | Estimates cost of a request/conversation given the catalog + recent usage                                              | cost, usage                  | "Estimate cost for this conversation"           |
+| Health Report      | `health-report`      | Aggregates circuit breaker, cooldown, lockout state per provider                                                       | health, resilience           | "Show health status of all providers"           |
+| List Capabilities  | `list-capabilities`  | Returns the full 42-entry Agent Skills catalog as a markdown table with raw SKILL.md URLs for context injection        | catalog, discovery, skills   | "List all OmniRoute capabilities"               |
+| Graph Engineering  | `graph-engineering`  | Deploys a multi-agent graph from a single prompt: planner-generated nodes/edges, parallel wave execution, shared state | agents, orchestration, graph | "Deploy an agent graph for this migration plan" |
+| Context Stack      | `context-stack`      | Builds the 3-layer context engineering stack (global/project/task) with token budget + memory-backed persistence       | context, memory, layers      | "Build a context stack from these sections"     |
 
 > Note: the Agent Card description currently advertises "36+ providers" (`src/app/.well-known/agent.json/route.ts:26` and `:55`). The actual catalog has grown to 180+ providers — the string should be updated in a follow-up change (tracked as a separate doc/code TODO; not modified here).
 

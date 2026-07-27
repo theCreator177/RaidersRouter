@@ -17,6 +17,7 @@ import { registerDefaultGuardrails } from "./lib/guardrails";
 import { ensurePersistentManagementPasswordHash } from "./lib/auth/managementPassword";
 import { skillExecutor } from "./lib/skills/executor";
 import { registerBuiltinSkills } from "./lib/skills/builtins";
+import { registerGraphEngineeringSkills } from "./lib/skills/builtin/graphEngineering";
 import { createLogger } from "./shared/utils/logger";
 
 const startupLog = createLogger("server-init");
@@ -99,6 +100,7 @@ async function startServer() {
     startSpendBatchWriter();
     registerDefaultGuardrails();
     registerBuiltinSkills(skillExecutor);
+    registerGraphEngineeringSkills(skillExecutor);
     startupLog.info("Spend batch writer started");
     startupLog.info("Guardrail registry initialized");
     startupLog.info("Builtin skill handlers registered");

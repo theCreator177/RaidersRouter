@@ -23,6 +23,7 @@ const { memoryTools } = await import("../../open-sse/mcp-server/tools/memoryTool
 const { skillTools } = await import("../../open-sse/mcp-server/tools/skillTools.ts");
 const { compressionTools } = await import("../../open-sse/mcp-server/tools/compressionTools.ts");
 const { poolTools } = await import("../../open-sse/mcp-server/tools/poolTools.ts");
+const { graphContextTools } = await import("../../open-sse/mcp-server/tools/graphContextTools.ts");
 
 type McpToolDef = {
   name: string;
@@ -37,6 +38,7 @@ const COLLECTIONS: Record<string, Record<string, McpToolDef>> = {
   skillTools: skillTools as unknown as Record<string, McpToolDef>,
   compressionTools: compressionTools as unknown as Record<string, McpToolDef>,
   poolTools: poolTools as unknown as Record<string, McpToolDef>,
+  graphContextTools: graphContextTools as unknown as Record<string, McpToolDef>,
 };
 
 for (const [collectionName, collection] of Object.entries(COLLECTIONS)) {
@@ -67,7 +69,11 @@ for (const [collectionName, collection] of Object.entries(COLLECTIONS)) {
         `${toolDef.name}: inputSchema.parse must be callable`
       );
       // handler must be callable — the loop awaits toolDef.handler(parsedArgs)
-      assert.equal(typeof toolDef.handler, "function", `${toolDef.name}: handler must be a function`);
+      assert.equal(
+        typeof toolDef.handler,
+        "function",
+        `${toolDef.name}: handler must be a function`
+      );
       // scopes feeds the 3-arg withScopeEnforcement(name, handler, scopes)
       assert.ok(
         Array.isArray(toolDef.scopes) && toolDef.scopes.length > 0,

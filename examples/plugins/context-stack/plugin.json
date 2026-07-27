@@ -1,0 +1,43 @@
+{
+  "name": "context-stack",
+  "version": "1.0.0",
+  "description": "Injects a 3-layer context stack (global rules, project knowledge, task) into every chat request",
+  "author": "OmniRoute",
+  "license": "MIT",
+  "main": "index.mjs",
+  "source": "local",
+  "tags": ["context", "context-engineering", "injection"],
+  "hooks": {
+    "onRequest": true,
+    "onResponse": false,
+    "onError": false
+  },
+  "requires": {
+    "permissions": []
+  },
+  "enabledByDefault": false,
+  "configSchema": {
+    "globalContext": {
+      "type": "string",
+      "default": "",
+      "description": "Global layer: identity, hard rules, and constraints (always present)"
+    },
+    "projectContext": {
+      "type": "string",
+      "default": "",
+      "description": "Project layer: architecture, conventions, decisions (AGENTS.md-style)"
+    },
+    "maxChars": {
+      "type": "number",
+      "default": 24000,
+      "min": 1000,
+      "max": 200000,
+      "description": "Maximum characters of injected context (project layer is trimmed first)"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable or disable context injection"
+    }
+  }
+}

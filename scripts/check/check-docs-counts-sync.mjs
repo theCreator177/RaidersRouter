@@ -148,8 +148,9 @@ function readCodeFacts() {
     'import {notionTools} from "./open-sse/mcp-server/tools/notionTools.ts";',
     'import {obsidianTools} from "./open-sse/mcp-server/tools/obsidianTools.ts";',
     'import {compressionTools} from "./open-sse/mcp-server/tools/compressionTools.ts";',
+    'import {graphContextTools} from "./open-sse/mcp-server/tools/graphContextTools.ts";',
     "const cols={MCP_TOOLS,memoryTools,skillTools,agentSkillTools,githubSkillTools,poolTools,",
-    "gamificationTools,pluginTools,notionTools,obsidianTools,compressionTools};",
+    "gamificationTools,pluginTools,notionTools,obsidianTools,compressionTools,graphContextTools};",
     "const sc=new Set();",
     "for(const col of Object.values(cols))for(const t of Object.values(col))",
     "for(const x of (t?.scopes||[]))sc.add(x);",
@@ -324,12 +325,7 @@ export function buildChecks() {
           "CLAUDE.md",
           "AGENTS.md",
         ]),
-        claim(
-          f.cliTotal,
-          "CLI tools",
-          { pattern: /(\d+) tools(?=\s*\(\d+ CLI)/gi },
-          ["README.md"]
-        ),
+        claim(f.cliTotal, "CLI tools", { pattern: /(\d+) tools(?=\s*\(\d+ CLI)/gi }, ["README.md"]),
       ];
     })(),
     {

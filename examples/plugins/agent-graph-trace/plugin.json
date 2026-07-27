@@ -1,0 +1,38 @@
+{
+  "name": "agent-graph-trace",
+  "version": "1.0.0",
+  "description": "Records agent-graph node executions into a shared JSONL state file for observability",
+  "author": "OmniRoute",
+  "license": "MIT",
+  "main": "index.mjs",
+  "source": "local",
+  "tags": ["agents", "graph", "observability", "trace"],
+  "hooks": {
+    "onRequest": true,
+    "onResponse": true,
+    "onError": false
+  },
+  "requires": {
+    "permissions": ["file-read", "file-write"]
+  },
+  "enabledByDefault": false,
+  "configSchema": {
+    "traceDir": {
+      "type": "string",
+      "default": "",
+      "description": "Directory for graph-trace JSONL files (default: <tmpdir>/omniroute-graph-traces)"
+    },
+    "maxPreviewChars": {
+      "type": "number",
+      "default": 400,
+      "min": 0,
+      "max": 4000,
+      "description": "Characters of the node output preview stored per trace entry"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable or disable graph tracing"
+    }
+  }
+}

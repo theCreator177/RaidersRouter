@@ -278,6 +278,7 @@ export async function registerNodejs(): Promise<void> {
     { ensurePersistentManagementPasswordHash },
     { skillExecutor },
     { registerBuiltinSkills },
+    { registerGraphEngineeringSkills },
   ] = await Promise.all([
     import("@/lib/gracefulShutdown"),
     import("@/lib/apiBridgeServer"),
@@ -292,6 +293,7 @@ export async function registerNodejs(): Promise<void> {
     import("@/lib/auth/managementPassword"),
     import("@/lib/skills/executor"),
     import("@/lib/skills/builtins"),
+    import("@/lib/skills/builtin/graphEngineering"),
   ]);
 
   // Proxy health scheduler (auto-removes dead proxies on interval)
@@ -305,6 +307,7 @@ export async function registerNodejs(): Promise<void> {
   startSpendBatchWriter();
   registerDefaultGuardrails();
   registerBuiltinSkills(skillExecutor);
+  registerGraphEngineeringSkills(skillExecutor);
   console.log("[STARTUP] Spend batch writer started");
   console.log("[STARTUP] Guardrail registry initialized");
   console.log("[STARTUP] Builtin skill handlers registered");

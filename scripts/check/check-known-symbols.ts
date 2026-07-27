@@ -350,6 +350,13 @@ export const KNOWN_MCP_TOOL_NAMES: readonly string[] = [
   "obsidian_sync_trigger",
   "obsidian_sync_conflicts",
   "obsidian_sync_resolve_conflict",
+  // graphContextTools (6)
+  "omniroute_agent_graph_plan",
+  "omniroute_agent_graph_validate",
+  "omniroute_agent_graph_run",
+  "omniroute_context_stack_build",
+  "omniroute_context_stack_save",
+  "omniroute_context_stack_load",
 ];
 
 // ───────────────────────────────────────────────────────────────────────────
@@ -562,6 +569,8 @@ async function main(): Promise<void> {
   const { pluginTools } = await import("@omniroute/open-sse/mcp-server/tools/pluginTools.ts");
   const { notionTools } = await import("@omniroute/open-sse/mcp-server/tools/notionTools.ts");
   const { obsidianTools } = await import("@omniroute/open-sse/mcp-server/tools/obsidianTools.ts");
+  const { graphContextTools } =
+    await import("@omniroute/open-sse/mcp-server/tools/graphContextTools.ts");
 
   // Build the full live set of registered tools (deduped by RESERVED_MCP_NAMES logic:
   // agentSkillTools + compressionTools are already in MCP_TOOLS).
@@ -573,6 +582,7 @@ async function main(): Promise<void> {
     ...(pluginTools as unknown as McpToolLike[]),
     ...(notionTools as unknown as McpToolLike[]),
     ...(obsidianTools as unknown as McpToolLike[]),
+    ...Object.values(graphContextTools as Record<string, McpToolLike>),
   ];
   const liveMcpToolNames = new Set(liveMcpTools.map((t) => t.name));
 
