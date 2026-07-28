@@ -1,0 +1,9 @@
+{
+  "name": "raiders-toolkit",
+  "description": "Wrapper, reference, and translated skills bundled by RaidersRouter for repos that are not native Claude Code plugins: superfile, Strix, jcode, the system-prompt corpus, and the ai-berkshire value-investing framework (translated to English).",
+  "version": "0.1.0",
+  "author": { "name": "RaidersRouter" },
+  "homepage": "https://github.com/theCreator177/RaidersRouter",
+  "license": "MIT",
+  "keywords": ["superfile", "strix", "jcode", "system-prompts", "value-investing", "terminal"]
+}

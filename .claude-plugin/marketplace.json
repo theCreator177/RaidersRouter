@@ -1,0 +1,89 @@
+{
+  "name": "raiders-router",
+  "owner": {
+    "name": "RaidersRouter",
+    "url": "https://github.com/theCreator177/RaidersRouter"
+  },
+  "description": "Curated Claude Code marketplace bundling the RaidersRouter agent toolkit: native plugins (video, engineering skills, Codex), skills collections (OmniRoute, code-review-graph, AI-engineering, Openship), and locally authored wrapper/reference/translated skills (superfile, Strix, jcode, system-prompt corpus, ai-berkshire value investing).",
+  "metadata": {
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "raiders-toolkit",
+      "source": "./plugins/raiders-toolkit",
+      "description": "Locally authored wrapper, reference, and translated skills for tools that are NOT native Claude Code plugins: superfile (terminal file-manager control & organization), Strix (autonomous pentest agent), jcode (fast Rust coding harness), system-prompt corpus reference, and an English translation of the ai-berkshire value-investing research framework.",
+      "category": "productivity",
+      "keywords": ["superfile", "strix", "jcode", "system-prompts", "value-investing"],
+      "license": "MIT"
+    },
+    {
+      "name": "watch",
+      "source": { "source": "github", "repo": "bradautomates/claude-video" },
+      "description": "Give Claude the ability to actually watch a video: yt-dlp download, ffmpeg frame extraction, captions with Whisper fallback. Requires `yt-dlp` and `ffmpeg` on PATH.",
+      "category": "media",
+      "keywords": ["video", "ffmpeg", "yt-dlp", "transcription"],
+      "license": "MIT"
+    },
+    {
+      "name": "mattpocock-skills",
+      "source": { "source": "github", "repo": "mattpocock/skills" },
+      "description": "Matt Pocock's engineering-workflow skills: TDD, code-review, diagnosing-bugs, domain-modeling, research, plus /grill-me, /triage, /implement, /to-spec, /handoff and more.",
+      "category": "engineering",
+      "keywords": ["tdd", "code-review", "engineering", "workflow"],
+      "license": "MIT"
+    },
+    {
+      "name": "codex",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/openai/codex-plugin-cc",
+        "path": "plugins/codex"
+      },
+      "description": "Invoke OpenAI Codex from inside Claude Code for code review and task delegation: /codex:review, /codex:adversarial-review, /codex:rescue, /codex:transfer, /codex:status. Requires the Codex CLI installed locally.",
+      "category": "engineering",
+      "keywords": ["codex", "openai", "review", "delegation"],
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "omniroute-skills",
+      "source": { "source": "github", "repo": "diegosouzapw/OmniRoute" },
+      "strict": false,
+      "skills": "./skills",
+      "description": "OmniRoute agent skills (~43): omni-auth, omni-providers, omni-models, omni-combos-routing, omni-mcp, omni-agents-a2a and CLI skills, adapted from the upstream skills/ tree. Pair with the OmniRoute MCP server for live tool access.",
+      "category": "ai-infra",
+      "keywords": ["omniroute", "llm-gateway", "routing", "mcp"],
+      "license": "MIT"
+    },
+    {
+      "name": "code-review-graph",
+      "source": { "source": "github", "repo": "tirth8205/code-review-graph" },
+      "strict": false,
+      "skills": "./skills",
+      "description": "Local-first code-intelligence graph for token-efficient AI reviews. Ships 7 skills (build-graph, explore-codebase, review-changes, review-delta, review-pr, refactor-safely, debug-issue). A ~30-tool MCP server is available separately via `code-review-graph serve`.",
+      "category": "engineering",
+      "keywords": ["code-review", "graph", "mcp", "codebase"],
+      "license": "MIT"
+    },
+    {
+      "name": "ai-engineering-skills",
+      "source": { "source": "github", "repo": "rohitg00/ai-engineering-from-scratch" },
+      "strict": false,
+      "skills": "./.claude/skills",
+      "description": "Two committed skills from the AI-Engineering-from-Scratch curriculum: find-your-level (placement quiz mapping your ML knowledge to a curriculum entry point) and check-understanding. The wider generated catalog installs via `npx skills add rohitg00/ai-engineering-from-scratch`.",
+      "category": "learning",
+      "keywords": ["ai-engineering", "curriculum", "learning", "ml"],
+      "license": "MIT"
+    },
+    {
+      "name": "openship-config",
+      "source": { "source": "github", "repo": "oblien/openship" },
+      "strict": false,
+      "skills": "./.claude/skills",
+      "description": "The openship-config skill bundled by the Openship self-hosted deployment platform, for configuring Openship deployments/routing from Claude Code.",
+      "category": "devops",
+      "keywords": ["openship", "deploy", "cicd", "self-hosted"],
+      "license": "Apache-2.0"
+    }
+  ]
+}
