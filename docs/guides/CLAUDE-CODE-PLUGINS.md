@@ -18,6 +18,7 @@ directly*.
 # …or manually, inside Claude Code:
 /plugin marketplace add theCreator177/RaidersRouter
 /plugin install raiders-toolkit@raiders-router
+/plugin install agent-architecture@raiders-router
 /plugin install watch@raiders-router
 # …etc, see the table below
 
@@ -45,6 +46,7 @@ teammates are prompted automatically, create `.claude/settings.json`:
   },
   "enabledPlugins": {
     "raiders-toolkit@raiders-router": true,
+    "agent-architecture@raiders-router": true,
     "watch@raiders-router": true,
     "mattpocock-skills@raiders-router": true,
     "codex@raiders-router": true,
@@ -63,7 +65,13 @@ negation rule (`!.claude/settings.json`) *after* those lines, or it will be sile
 
 ## What's bundled
 
-Eight plugins, covering twelve upstream repositories.
+Nine plugins: eight covering twelve upstream repositories, plus one authored here from source material.
+
+### Authored here (no upstream repo — built from source material)
+
+| Plugin | Source | What you get |
+| --- | --- | --- |
+| `agent-architecture` | [@elune0x](https://x.com/elune0x/status/2082133200386555918) | Two skills for building/debugging agents as three layers: `loop-graph-harness` (design) and `agent-failure-triage` (route a symptom to the layer that owns it). Bundles a tooling reference covering Temporal, LangGraph, NetworkX, E2B, OpenAI Evals, OpenTelemetry. |
 
 ### Installed directly (upstream is already a Claude Code plugin)
 
@@ -87,9 +95,10 @@ as-is with **no fork and no file copying**.
 
 ### Wrapped locally (`raiders-toolkit`)
 
-Five upstreams are **not** Claude Code plugins — they're standalone binaries, a data corpus, and a
-Chinese-language prompt collection. There is nothing to "install" in the plugin sense, so this repo
-authors skills that teach Claude to *use* them. Source: `plugins/raiders-toolkit/skills/`.
+Six sources are **not** Claude Code plugins — standalone binaries, a data corpus, a
+Chinese-language prompt collection, and an infographic. There is nothing to "install" in the plugin
+sense, so this repo authors skills that teach Claude to *use* them.
+Source: `plugins/raiders-toolkit/skills/`.
 
 | Skill | Upstream | Why wrapped |
 | --- | --- | --- |

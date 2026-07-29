@@ -18,6 +18,7 @@ MARKETPLACE_REPO="theCreator177/RaidersRouter"
 # Plugins are listed as "name:requirement" — requirement is a human note, not enforced.
 PLUGINS=(
   "raiders-toolkit:no external deps"
+  "agent-architecture:no external deps"
   "watch:needs yt-dlp + ffmpeg on PATH"
   "mattpocock-skills:none"
   "codex:needs the Codex CLI installed"

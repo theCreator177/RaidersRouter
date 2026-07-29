@@ -18,6 +18,14 @@
       "license": "MIT"
     },
     {
+      "name": "agent-architecture",
+      "source": "./plugins/agent-architecture",
+      "description": "Build and debug agents as three separate systems: the LOOP (turns, retries, budgets, exits), the GRAPH (nodes, edges, state, checkpoints), and the HARNESS (tools, permissions, sandboxes, evals, traces). Ships loop-graph-harness for design and agent-failure-triage for routing a symptom to the layer that owns it.",
+      "category": "engineering",
+      "keywords": ["agents", "architecture", "debugging", "langgraph", "temporal", "evals"],
+      "license": "MIT"
+    },
+    {
       "name": "watch",
       "source": { "source": "github", "repo": "bradautomates/claude-video" },
       "description": "Give Claude the ability to actually watch a video: yt-dlp download, ffmpeg frame extraction, captions with Whisper fallback. Requires `yt-dlp` and `ffmpeg` on PATH.",
