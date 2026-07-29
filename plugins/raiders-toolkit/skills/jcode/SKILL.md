@@ -1,24 +1,25 @@
 ---
 name: jcode
 description: >
-  Install and delegate work to jcode — a RAM-efficient standalone AI coding-agent harness written
-  in Rust (~28 MB baseline RSS, ~14 ms time-to-first-frame). Use this when the user wants a
-  lightweight local coding agent, is working on a constrained/low-memory machine, asks to run or
-  benchmark jcode, or wants to hand a bounded subtask to a separate agent process.
+  Install and drive jcode — a fast Rust coding-agent harness that runs single-shot,
+  non-interactive tasks via `jcode run` with JSON/NDJSON output, speaks ~45 model providers
+  (including openai-compatible, ollama, lmstudio and kimi), and can be pointed at a local
+  gateway such as OmniRoute. Use this when the user wants a lightweight local coding agent,
+  wants to delegate a bounded subtask to a separate agent process, wants a scriptable agent
+  they can pipe JSON out of, is on a low-memory machine, or mentions jcode.
 when_to_use: >
-  User names jcode; wants a low-memory local coding harness; wants to benchmark agent harnesses;
-  wants to delegate a self-contained subtask to a separate agent binary.
+  User names jcode; wants a scriptable/headless coding agent; wants to delegate a self-contained
+  subtask to a separate agent binary; wants an agent that routes through a local OpenAI-compatible
+  gateway; wants a low-memory harness.
 ---
 
-# jcode — lightweight Rust coding-agent harness (wrapper)
+# jcode — fast Rust coding-agent harness
 
 **Upstream:** https://github.com/1jehuang/jcode · MIT · Rust · default branch `master`
+**Tagline:** "A coding agent using Claude Max or ChatGPT Pro subscriptions"
 
-> **Read this first.** jcode is *itself* an agent harness — a peer/competitor to Claude Code, not a
-> plugin for it. Running it from inside Claude Code means one agent driving another, which burns
-> tokens twice and splits context. Use it deliberately: for benchmarking, for genuinely detached
-> subtasks, or when the user specifically wants jcode. For normal coding work in this session, just
-> do the work directly — that is strictly better.
+Everything below marked *verified* was measured against **v0.61.1** on Linux x86_64, not quoted
+from the README.
 
 ## Install
 
@@ -26,32 +27,112 @@ when_to_use: >
 # macOS / Linux
 curl -fsSL https://jcode.sh/install | bash
 
+# Windows 11 (PowerShell 5.1+)
+irm https://jcode.sh/install.ps1 | iex
+
 # Homebrew
 brew tap 1jehuang/jcode && brew install jcode
-
-# Windows (PowerShell)
-irm https://jcode.sh/install.ps1 | iex
 
 # From source
 git clone https://github.com/1jehuang/jcode && cd jcode && cargo build --release
 ```
 
-Verify with `jcode --version`.
+*Verified* about the shell installer:
 
-## Notes on structure
+- **No `sudo`** — installs to `~/.local/bin` (override with `JCODE_INSTALL_DIR`); on Windows,
+  `%LOCALAPPDATA%\jcode\bin`, added to the user PATH.
+- **SHA-256 verified** — it refuses to install if it can't find a trusted checksum.
+- Contacts three hosts: `github.com` (binary), `jcode.sh/releases` (metadata),
+  `telemetry.jcode.sh` (see below).
+- Appends a PATH line to your shell rc file idempotently, and skips it if the dir is already on PATH.
+- Disk: ~138 MB installed.
 
-- Its own skills namespace lives at `.jcode/skills/` — **not** interoperable with Claude Code's
+### Two defaults worth changing
+
+**Telemetry is ON by default.** It reports install count, version, OS, session activity, tool
+counts, and crash/exit reasons — the project states no code, filenames, or prompts are sent.
+Opt out:
+
+```bash
+export JCODE_NO_TELEMETRY=1     # or the standard DO_NOT_TRACK=1
+```
+
+Set it before running the installer if you want the install event suppressed too.
+
+**Auto-update is ON by default** for release builds. Pass `--no-update` per invocation, which
+matters when you want a reproducible agent version in a script or CI job.
+
+## Command surface
+
+jcode is **not** interactive-only — this is what makes it usable from another agent:
+
+| Command | Purpose |
+| --- | --- |
+| `jcode run <MESSAGE>` | **Single message, then exit.** The delegation path. |
+| `jcode repl` | Simple REPL, no TUI |
+| `jcode serve` | Background agent daemon |
+| `jcode server` | Manage the daemon (`jcode server stop`) |
+| `jcode connect` | Connect to a running server |
+| `jcode acp` | Agent Client Protocol adapter backed by the daemon |
+| `jcode login [provider]` | OAuth, API key, or local credentials |
+
+Useful `run` flags: `--json` (machine-readable result), `--ndjson` (streaming events),
+`-C/--cwd` (working directory), `-p/--provider`, `--no-update`.
+
+## Delegating work to it
+
+Because `jcode run` is single-shot and can emit JSON, delegation is genuinely practical:
+
+```bash
+# Bounded subtask in its own directory, machine-readable result
+jcode run "Add a --dry-run flag to scripts/deploy.sh and update its --help" \
+  --cwd /path/to/repo --json --no-update
+
+# Stream events instead of waiting
+jcode run "Explain the retry logic in src/retry.rs" --ndjson
+```
+
+Give it a **fully specified, self-contained** job in its own working directory, then review the
+diff before anything is committed — treat its output like an untrusted contributor's PR.
+
+Worth being honest about the tradeoff: jcode is itself an agent harness, so running it from
+inside another agent means two models on one task. That's justified for genuinely parallel or
+isolated subtasks, for benchmarking, or when you specifically want jcode's provider routing —
+and not justified for work the current session can simply do itself.
+
+## Provider routing (~45 providers)
+
+`jcode login <provider>` / `jcode run -p <provider>` supports OAuth subscriptions (Claude Max,
+ChatGPT Pro), direct API keys, and local runtimes. Notable entries: `claude`, `anthropic-api`,
+`openai`, `gemini`, `kimi`, `moonshot-ai`, `deepseek`, `groq`, `mistral`, `xai`, `openrouter`,
+`bedrock`, `azure`, `ollama`, `lmstudio`, `openai-compatible`, `copilot`, `cursor`.
+
+**Point it at your own gateway.** Since `openai-compatible` is supported, jcode can route
+through a local OmniRoute/RaidersRouter instance so its traffic gets the same fallback,
+quota-awareness, and logging as everything else:
+
+```bash
+jcode login openai-compatible     # base URL: http://localhost:20128/v1
+jcode run "…" -p openai-compatible
+```
+
+## Measured facts (v0.61.1, Linux x86_64)
+
+| Metric | Measured | Note |
+| --- | --- | --- |
+| Peak RSS (`jcode --version`) | **23.4 MB** | README claims ~27.8 MB baseline; measured lower |
+| Binary | ~505 MB apparent (sparse) | on-disk install ~138 MB |
+| Install total | 138 MB | `~/.jcode` + launcher symlink |
+
+Measure on your own hardware before quoting numbers — startup RSS varies by platform and
+build. For a real comparison use `hyperfine` for time and `/usr/bin/time -v` (or
+`resource.getrusage`) for peak memory, on the same task.
+
+## Structural notes
+
+- Its skills namespace is `.jcode/skills/` — **not** interoperable with Claude Code's
   `.claude/skills/`. A skill written for one is not loaded by the other.
-- `.claude/mcp.json` in the jcode repo is jcode's *consumer-side* MCP client config (it consumes MCP
-  servers); jcode does not expose an MCP server.
+- `.claude/mcp.json` in the jcode repo is jcode's *consumer-side* MCP client config; jcode
+  consumes MCP servers and does not expose one.
 - It ships its own `AGENTS.md` convention.
-
-## Sensible uses
-
-- **Benchmarking:** compare startup/RSS against other harnesses on the same task, and report numbers
-  you actually measured (`/usr/bin/time -v`, `hyperfine`) rather than quoting the README's claims.
-- **Detached subtask:** hand jcode a fully self-contained, well-specified job in its own working
-  directory, then review its diff before anything is committed.
-- **Low-memory host:** recommend it when the user's machine can't comfortably run a heavier harness.
-
-Always review any code jcode produces before committing — treat it as an untrusted contributor's PR.
+- `jcode acp` speaks the Agent Client Protocol, so it can slot into ACP-aware editors.
