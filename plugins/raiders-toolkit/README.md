@@ -13,6 +13,7 @@ of them can be installed as a plugin, so this plugin teaches Claude how to *use*
 | `jcode` | [1jehuang/jcode](https://github.com/1jehuang/jcode) | MIT | Install the Rust coding harness; delegate bounded subtasks or benchmark |
 | `system-prompts-reference` | [asgeirtj/system_prompts_leaks](https://github.com/asgeirtj/system_prompts_leaks) | CC0-1.0 | Consult a public corpus of extracted system prompts for prompt-engineering prior art |
 | `investment-research` | [xbtlin/ai-berkshire](https://github.com/xbtlin/ai-berkshire) | MIT | Buffett/Munger/Duan Yongping/Li Lu research framework — **translated from Chinese to English** |
+| `graph-loop` | [@kingwilliam_](https://x.com/kingwilliam_/status/2080359562679349316) | — | Turn a flat pile of notes into a graph the model walks: router, index, one-idea nodes, sharp edges, code-based retrieval |
 
 ## Local development
 

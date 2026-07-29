@@ -4,7 +4,7 @@
     "name": "RaidersRouter",
     "url": "https://github.com/theCreator177/RaidersRouter"
   },
-  "description": "Curated Claude Code marketplace bundling the RaidersRouter agent toolkit: native plugins (video, engineering skills, Codex), skills collections (OmniRoute, code-review-graph, AI-engineering, Openship), and locally authored wrapper/reference/translated skills (superfile, Strix, jcode, system-prompt corpus, ai-berkshire value investing).",
+  "description": "Curated Claude Code marketplace bundling the RaidersRouter agent toolkit: native plugins (video, engineering skills, Codex), skills collections (OmniRoute, code-review-graph, AI-engineering, Openship), and locally authored wrapper/reference/translated skills (superfile, Strix, jcode, system-prompt corpus, ai-berkshire value investing, Graph Loop).",
   "metadata": {
     "version": "0.1.0"
   },
@@ -12,9 +12,9 @@
     {
       "name": "raiders-toolkit",
       "source": "./plugins/raiders-toolkit",
-      "description": "Locally authored wrapper, reference, and translated skills for tools that are NOT native Claude Code plugins: superfile (terminal file-manager control & organization), Strix (autonomous pentest agent), jcode (fast Rust coding harness), system-prompt corpus reference, and an English translation of the ai-berkshire value-investing research framework.",
+      "description": "Locally authored wrapper, reference, and translated skills for tools that are NOT native Claude Code plugins: superfile (terminal file-manager control & organization), Strix (autonomous pentest agent), jcode (fast Rust coding harness), system-prompt corpus reference, an English translation of the ai-berkshire value-investing research framework, and the Graph Loop method for turning a pile of notes into a walkable knowledge graph.",
       "category": "productivity",
-      "keywords": ["superfile", "strix", "jcode", "system-prompts", "value-investing"],
+      "keywords": ["superfile", "strix", "jcode", "system-prompts", "value-investing", "knowledge-graph"],
       "license": "MIT"
     },
     {

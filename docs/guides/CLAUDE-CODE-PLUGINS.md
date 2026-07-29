@@ -98,6 +98,7 @@ authors skills that teach Claude to *use* them. Source: `plugins/raiders-toolkit
 | `jcode` | [1jehuang/jcode](https://github.com/1jehuang/jcode) | Rust agent harness — a *peer* of Claude Code, not a plugin. Skill covers install + when delegating is actually worth it. |
 | `system-prompts-reference` | [asgeirtj/system_prompts_leaks](https://github.com/asgeirtj/system_prompts_leaks) | Pure Markdown data (CC0). Skill teaches targeted fetching + accuracy caveats. |
 | `investment-research` | [xbtlin/ai-berkshire](https://github.com/xbtlin/ai-berkshire) | Upstream is Simplified Chinese flat files with no frontmatter. **Translated to English** and restructured into skill format. |
+| `graph-loop` | [@kingwilliam_ infographic](https://x.com/kingwilliam_/status/2080359562679349316) | Not a repo at all — a 12-panel image. Transcribed into a method skill: router (`CLAUDE.md`), one-line index, one-idea nodes, sharp edges, and **retrieval as code** (step 9). |
 
 ---
 
