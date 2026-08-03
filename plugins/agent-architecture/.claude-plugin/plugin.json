@@ -1,0 +1,9 @@
+{
+  "name": "agent-architecture",
+  "description": "Separate the three systems every agent actually has — the loop (repetition), the graph (topology), and the harness (reality). Design each deliberately, triage failures to the layer that owns them, and build training/eval environments that measure real capability.",
+  "version": "0.1.0",
+  "author": { "name": "RaidersRouter" },
+  "homepage": "https://github.com/theCreator177/RaidersRouter",
+  "license": "MIT",
+  "keywords": ["agents", "architecture", "loop", "graph", "harness", "debugging", "evals", "sandbox", "rl", "reward-hacking"]
+}
