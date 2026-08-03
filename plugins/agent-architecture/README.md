@@ -34,6 +34,7 @@ harness  ─ controls reality     (tools, permissions, memory, sandboxes, evals,
 | --- | --- |
 | `loop-graph-harness` | Designing, reviewing, or rewriting an agent; choosing between LangGraph / Temporal / a plain loop; deciding where retries, state, permissions, or evals belong |
 | `agent-failure-triage` | An agent loops forever, can't explain itself, has too much access, or a prompt change silently regressed — routes the symptom to the layer that owns it |
+| `training-agentic-environments` | Designing RL environments, rewards, or evals for agents — verifier-graded final state over self-reported completion, harness randomization, budgets that cost reward, and layered anti-reward-hacking. Sourced from the Kimi K3 technical report. |
 
 `loop-graph-harness` bundles `references/tooling.md`, covering the six reference projects
 (Temporal, LangGraph, NetworkX, E2B, OpenAI Evals, OpenTelemetry) with adoption guidance and an

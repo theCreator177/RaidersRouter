@@ -71,7 +71,7 @@ Nine plugins: eight covering twelve upstream repositories, plus one authored her
 
 | Plugin | Source | What you get |
 | --- | --- | --- |
-| `agent-architecture` | [@elune0x](https://x.com/elune0x/status/2082133200386555918) | Two skills for building/debugging agents as three layers: `loop-graph-harness` (design) and `agent-failure-triage` (route a symptom to the layer that owns it). Bundles a tooling reference covering Temporal, LangGraph, NetworkX, E2B, OpenAI Evals, OpenTelemetry. |
+| `agent-architecture` | [@elune0x](https://x.com/elune0x/status/2082133200386555918) + [Kimi K3 tech report](https://github.com/MoonshotAI/Kimi-K3/blob/main/k3_tech_report.pdf) | Three skills for building, debugging and training agents as three layers: `loop-graph-harness` (design), `agent-failure-triage` (route a symptom to the layer that owns it), and `training-agentic-environments` (RL/eval environment + reward design). Bundles a tooling reference covering Temporal, LangGraph, NetworkX, E2B, OpenAI Evals, OpenTelemetry. |
 
 ### Installed directly (upstream is already a Claude Code plugin)
 
